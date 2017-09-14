@@ -12,12 +12,11 @@ $requete -> execute(array(
   'pseudo' => $_POST['pseudo'],
   'message' => $_POST['message']
 ));
-
 $requete -> closeCursor();
 
 header('location: mini_chat.php');
-if(header("refresh:0")){
-  $bdd -> exec('DELETE * FROM mini_chat');
-}
+// if(header("refresh:0")){
+//   $bdd -> exec('DELETE * FROM mini_chat');
+// }
 
  ?>

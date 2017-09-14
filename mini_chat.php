@@ -28,14 +28,16 @@
 
 <form class="formulaire" action="mini_chatpost.php" method="post">
   <p>Pseudo</p>
-  <input type="text" name="pseudo" value="">
+  <input type="text" required="true" name="pseudo" value="">
   <p>Message</p>
-  <input type="text" class="msg" name="message" value="">
-  <input type="submit" class="my-4 btn btn-outline-info" name="envoyer" value="Envoyer">
+  <input type="text" class="msg" required="true" name="message" value="">
+  <input type="submit" class="my-4 btn btn-outline-info" name="envoyer" value="Send">
 </form>
 
 
 <?php
+
+//CONNEXION BASE DE DONNEES
 try{
 $bdd = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
@@ -44,14 +46,15 @@ catch (Exception $e)
   die('Erreur: '. $e->getMessage());
 }
 
+  //LANCEMENT DE REQUÊTE
 $requete2 = $bdd -> query('SELECT * FROM mini_chat ORDER BY ID DESC LIMIT 0, 10');
 
 while ($donnees = $requete2->fetch()){
 
-  echo "<div class='chat'> <p><em id='pseudo'>" .$donnees['pseudo']. "</em> : " . $donnees['message']. "</p></div>";
+  echo "<div class='chat'> <p><em id='pseudo'>" .htmlspecialchars($donnees['pseudo']). "</em> : " . htmlspecialchars($donnees['message']). "</p></div>";
 }
-
 $requete2 -> closeCursor();
+
  ?>
 
 
