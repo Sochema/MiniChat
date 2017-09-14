@@ -16,5 +16,8 @@ $requete -> execute(array(
 $requete -> closeCursor();
 
 header('location: mini_chat.php');
+if(header("refresh:0")){
+  $bdd -> exec('DELETE * FROM mini_chat');
+}
 
  ?>
